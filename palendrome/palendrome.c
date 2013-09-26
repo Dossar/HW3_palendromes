@@ -5,29 +5,75 @@
  * Created on September 23, 2013, 2:28 PM
  */
 
-/* PROGRESS
-
-- Current code is bulky and all in the main function. The code for creating the new palindrome examples can be put into functions, but for now this code is just a working build.
-- For the new palindrome examples, not a few characters are changed, but the entire original palindrome is changed. This might be a problem when grading comes.
-- Program works on both palindromes and not palindromes, both of even and odd length. I'm concerned about bulky code that can be reduced with function calls and global variables, along with not changing the entire original palindrome.
-
-*/
+/*
+ * The program has now been split up into functions to prevent main from being bulky.
+ * All the functions work. However, the original array gets changed entirely.
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-int main(int argc, char** argv) {
+/* GLOBAL VARIABLES AND ARRAYS */
+char text[100]; /* For original palindrome */
+char userchar[100]; /* For three other palindrome examples */
+int begin, middle, end, length = 0; /* Variables involved with the original palindrome check. */
+int i, length2 = 0; /* For generating 3 more palindrome examples */
+int palcheck = 1; /* For determining which example functions to execute. */
 
-   /* text is for storing the string. begin, middle, and, and length are involved with the palindrome check. */
-   char text[100];
-   int begin, middle, end, length = 0;
-   int palcheck = 1; /* This is to determine the 3 different palindrome functions to be executed. */
+/* FUNCTION DECLARATIONS */
+void checkpalindrome(void); /* User inputs original string for palindrome test. */
+void notpalindrome(void); /* In the case of not being a palindrome, the first example will need to fix the string */
+void palexample(void); /* Make examples of other palindromes from modifying the original text array */
+
+int main(int argc, char** argv){
    
-   printf("Please enter a string no longer than 100 characters: "); /* Prompt the user to input text into array */
-   gets(text); /* Save user's input string into text array */
+   /* Start the program off by having the user input a string and then check if it is a palindrome or not. */
+   checkpalindrome();
 
-   /* For calculating the length of the string, iterate through until the null terminator is reached. This will give the exact string length. */
+   /* For the case where the input was a palindrome */
+   if( begin == middle && palcheck == 1 ){
+	  printf("\"%s\"\nWhat you entered above is a palindrome.\nYou will be shown three other examples of palindromes now.\n", text);
+                 printf("Please enter a string no longer than 100 characters for the examples:\n");
+                 gets(userchar); /* Save user's input for generating 3 other palindromes */
+                 while( userchar[length2] != '\0' )
+                    length2++;
+
+                 /* Call palexample 3 times to generate 3 more examples of palindromes */
+                 palexample();
+                 palexample();
+                 palexample();
+
+   } /* End if statement for the case where it is a palindrome */
+
+   /* For the case where the input was not a palindrome. */
+   if( begin != middle && palcheck == 2 ){
+
+                 printf("Please enter a string no longer than 100 characters for the examples:\n");
+                 gets(userchar); /* Save user's input for generating 3 other palindromes */
+                 while( userchar[length2] != '\0' )
+                    length2++;
+
+                 /* Generate 3 more examples of palindromes, but original needs to be fixed first */
+                 notpalindrome();
+                 palexample();
+                 palexample();
+
+   } /* End if statement for the case where it is NOT a palindrome */
+
+   return (EXIT_SUCCESS); /* End of program */
+
+}
+
+
+/* This function has the user input the original string and then check if it is a palindrome or not. */
+void checkpalindrome(void){
+
+   /* Save user's input into text, the original palindrome array. */
+   printf("Please enter a string no longer than 100 characters: ");
+   gets(text);
+
+   /* Iterate through until the null terminator is reached. This will give the exact string length. */
    while ( text[length] != '\0' )
       length++;
 
@@ -35,16 +81,16 @@ int main(int argc, char** argv) {
    end = length - 1;
 
    /* If palindrome is odd length, decimal gets truncated. The "decimal" is just the one letter in the very middle.
-      Palindrome is a mirror of the first half. For example, 1110111, the 111 part is mirrored.
+      In palindromes, the second half is a mirror of the first half.
       For odd-length palindromes, the very middle letter does not matter.
       For even-length palindromes, the two middle letters need to be the same. */
    middle = length / 2;
 
    /* Iterate though all of the letters from the beginning to the middle of the string.
-      begin (array position) is for the first half of the string, end (array position) is for the second half of the string. */
+      begin is for first half positions, end is for second half positions. */
    for( begin = 0 ; begin < middle ; begin++ ) {
 
-	  /* if the text at the current position and the the (end - the current position) it is not a palindrome */
+	  /* If the text at the current mirrored positions does not match, it is not a palindrome */
 	  if( text[begin] != text[end] ){
 		 printf("\"%s\"\nWhat you entered above is not a palindrome.\nYou will be shown three other examples of palindromes now.\n", text);
                  palcheck = 2;
@@ -54,102 +100,54 @@ int main(int argc, char** argv) {
 	  end--; /* Move the second half position to match the mirrored portion in the first half. */
    }
 
-   /* Checks to see if the loop ended sucessfully finding a palindrome.
-      if a palindrome is found then that means that the loop sucessfully iterated to the center of the word */
-   if( begin == middle && palcheck == 1 ){
-	  printf("\"%s\"\nWhat you entered above is a palindrome.\nYou will be shown three other examples of palindromes now.\n", text);
-                 printf("Please enter a string no longer than 100 characters for the examples:\n");
-                 char userchar[100];
-                 int length2 = 0;
-                 gets(userchar); /* Save user's input for generating 3 other palindromes */
-                 while( userchar[length2] != '\0' ){
-                    length2++;
-                 }
-                 end = length - 1;
-                 int i = 0;
-                 begin = 0;
-                 /* Since a palindrome has been created, we only need to modify it now, don't need to check */
-                 for( begin = 0 ; begin < middle ; begin++ ){
-                    text[begin] = userchar[i];
-                    text[end] = userchar[i];
-                    end--;
-                    if( ++i > length2 - 1 )
-                      i = 0;                      
-                 }
-                 printf("\"%s\" is a possible palindrome.\n", text);
-                 end = length - 1;
-                 begin = 0;
-                 /* Since a palindrome has been created, we only need to modify it now, don't need to check */
-                 for( begin = 0 ; begin < middle ; begin++ ){
-                    text[begin] = userchar[i];
-                    text[end] = userchar[i];
-                    end--;
-                    if( ++i > length2 - 1 )
-                      i = 0;                      
-                 }
-                 printf("\"%s\" is a second possible palindrome.\n", text);
-                 end = length - 1;
-                 begin = 0;
-                 /* Since a palindrome has been created, we only need to modify it now, don't need to check */
-                 for( begin = 0 ; begin < middle ; begin++ ){
-                    text[begin] = userchar[i];
-                    text[end] = userchar[i];
-                    end--;
-                    if( ++i > length2 - 1 )
-                      i = 0;
-                 }
-                 printf("\"%s\" is a third possible palindrome.\n", text);
-   } /* End if statement for the case where it is a palindrome */
+   return;
 
-   /* For the case where the input was not a palindrome. */
-   if( begin != middle && palcheck == 2 ){
-
-                 printf("Please enter a string no longer than 100 characters for the examples:\n");
-                 char userchar[100];
-                 int length2 = 0;
-                 gets(userchar); /* Save user's input for generating 3 other palindromes */
-                 while( userchar[length2] != '\0' ){
-                    length2++;
-                 }
-                 end = length - 1;
-                 int i = 0;
-                 begin = 0;
-                 /* This for loop will manually create the palindrome. */
-                 for( begin = 0 ; begin < middle ; begin++ ){
-                    if( text[begin] != text[end] ){
-                       text[begin] = userchar[i];
-                       text[end] = userchar[i];
-                    }
-                    end--;
-                    if( ++i > length2 - 1 )
-                      i = 0;
-                 }
-                 printf("\"%s\" is a possible palindrome.\n", text);
-                 end = length - 1;
-                 begin = 0;
-                 /* Since a palindrome has been created, we only need to modify it now, don't need to check */
-                 for( begin = 0 ; begin < middle ; begin++ ){
-                    text[begin] = userchar[i];
-                    text[end] = userchar[i];
-                    end--;
-                    if( ++i > length2 - 1 )
-                      i = 0;                      
-                 }
-                 printf("\"%s\" is a second possible palindrome.\n", text);
-                 end = length - 1;
-                 begin = 0;
-                 /* Since a palindrome has been created, we only need to modify it now, don't need to check */
-                 for( begin = 0 ; begin < middle ; begin++ ){
-                    text[begin] = userchar[i];
-                    text[end] = userchar[i];
-                    end--;
-                    if( ++i > length2 - 1 )
-                      i = 0;
-                 }
-                 printf("\"%s\" is a third possible palindrome.\n", text);
-
-   } /* End if statement for the case where it is NOT a palindrome */
-
-   return (EXIT_SUCCESS); // end of program
 }
 
+
+/* This is for making the original inputted text a palindrome. */
+void notpalindrome(void){
+
+   end = length - 1;
+   begin = 0;
+
+   /* This for loop will manually create the palindrome since the original was not a palindrome. */
+   for( begin = 0 ; begin < middle ; begin++ ){
+                    
+      /* Test whether the corresponding mirrored positions are the same. If not, replace with a character inputted from the user. */
+      if( text[begin] != text[end] ){
+         text[begin] = userchar[i];
+         text[end] = userchar[i];
+      }
+      end--;
+      if( ++i > length2 - 1 )
+         i = 0;
+
+   }
+   printf("\"%s\" is a possible palindrome.\n", text);
+
+   return;
+}
+
+
+/* If the original palindrome array "text" is already a palindrome, no check is needed. */
+void palexample(void){
+
+   end = length - 1;
+   begin = 0;
+
+   /* Since a palindrome exists already, we only need to modify it now, don't need to check */
+   for( begin = 0 ; begin < middle ; begin++ ){
+
+      text[begin] = userchar[i];
+      text[end] = userchar[i];
+      end--;
+      if( ++i > length2 - 1 )
+         i = 0;      
+                
+   }
+   printf("\"%s\" is a possible palindrome.\n", text);
+
+   return;
+
+}
