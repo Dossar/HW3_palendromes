@@ -20,6 +20,7 @@ char userchar[100]; /* For three other palindrome examples */
 int begin, middle, end, length = 0; /* Variables involved with the original palindrome check. */
 int i, length2 = 0; /* For generating 3 more palindrome examples */
 int palcheck = 1; /* For determining which example functions to execute. */
+int midremainder = 0; /* For changing palindrome in the case it is odd */
 
 /* FUNCTION DECLARATIONS */
 void checkpalindrome(void); /* User inputs original string for palindrome test. */
@@ -84,6 +85,8 @@ void checkpalindrome(void){
       In palindromes, the second half is a mirror of the first half.
       For odd-length palindromes, the very middle letter does not matter.
       For even-length palindromes, the two middle letters need to be the same. */
+   if( length % 2 == 1 )
+      midremainder = 5;
    middle = length / 2;
 
    /* Iterate though all of the letters from the beginning to the middle of the string.
@@ -124,6 +127,11 @@ void notpalindrome(void){
          i = 0;
 
    }
+   /* If the palindrome is of odd length, this code changes the middle letter. */
+   if( midremainder == 5 ){
+      text[middle] = userchar[i];
+      i++;
+   }
    printf("\"%s\" is a possible palindrome.\n", text);
 
    return;
@@ -145,6 +153,11 @@ void palexample(void){
       if( ++i > length2 - 1 )
          i = 0;      
                 
+   }
+   /* If the palindrome is of odd length, this code changes the middle letter. */
+   if( midremainder == 5 ){
+      text[middle] = userchar[i];
+      i++;
    }
    printf("\"%s\" is a possible palindrome.\n", text);
 
