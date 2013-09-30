@@ -65,7 +65,7 @@ addafter(int num, int pos) {
 }/*End of addafter()*/
 
 /**
- * remove the element with data corresponding to the number given
+ * remove the element with info corresponding to the function argument
  * @param num
  * @return 
  */
@@ -115,8 +115,7 @@ display() {
 	  printf("List is empty\n");
 	  return;
    }
-   q = last->link;
-   printf("List is :\n");
+   q = last->link;   
    while (q != last) {
 	  printf("%d ", q->info);
 	  q = q->link;
