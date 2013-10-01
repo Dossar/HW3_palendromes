@@ -1,0 +1,52 @@
+please enter the number of players: 5
+1 2 3 4 5
+Please input a rhyme: this is an awful rhyme
+setting value -> this
+setting value -> is
+setting value -> an
+setting value -> awful
+setting value -> rhyme
+
+
+*** ROUND #1 ***
+Length of rhyme = 5 words
+player 1 = this
+player 2 = is
+player 3 = an
+player 4 = awful
+player 5 = rhyme
+removing player 5
+remaining players: 1 2 3 4
+
+*** ROUND #2 ***
+Length of rhyme = 5 words
+player 1 = this
+player 2 = is
+player 3 = an
+player 4 = awful
+player 1 = rhyme
+removing player 1
+remaining players: 2 3 4
+
+*** ROUND #3 ***
+Length of rhyme = 5 words
+player 2 = this
+player 3 = is
+player 4 = an
+player 2 = awful
+player 3 = rhyme
+removing player 3
+remaining players: 4 2
+
+*** ROUND #4 ***
+Length of rhyme = 5 words
+player 4 = this
+player 2 = is
+player 4 = an
+player 2 = awful
+player 4 = rhyme
+removing player 4
+remaining players: 2
+
+*** GAME WINNER === 2 ***
+
