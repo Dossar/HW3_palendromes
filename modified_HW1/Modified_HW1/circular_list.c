@@ -104,7 +104,6 @@ del(int num) {
    printf("Element %d not found\n", num);
 }/*End of del()*/
 
-
 /**
  * display the entire list.
  * @return 
@@ -115,7 +114,7 @@ display() {
 	  printf("List is empty\n");
 	  return;
    }
-   q = last->link;   
+   q = last->link;
    while (q != last) {
 	  printf("%d ", q->info);
 	  q = q->link;
