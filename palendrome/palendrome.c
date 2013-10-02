@@ -1,5 +1,5 @@
 /* 
- * File:   palindrome.c
+ * File:   palendrome.c
  * Author: Mike Meding and Roy Van Liew
  *
  * Created on September 23, 2013, 2:28 PM
@@ -94,7 +94,7 @@ void checkpalindrome(void){
    for( begin = 0 ; begin < middle ; begin++ ) {
 
 	  /* If the text at the current mirrored positions does not match, it is not a palindrome */
-	  if( text[begin] != text[end] ){
+	  if( tolower(text[begin]) != tolower(text[end]) ){
 		 printf("\"%s\"\nWhat you entered above is not a palindrome.\nYou will be shown three other examples of palindromes now.\n", text);
                  palcheck = 2;
 		 break; /* If the "mirrored" parts do not match, get out of this for statement. It is not a palindrome. */
@@ -118,7 +118,7 @@ void notpalindrome(void){
    for( begin = 0 ; begin < middle ; begin++ ){
                     
       /* Test whether the corresponding mirrored positions are the same. If not, replace with a character inputted from the user. */
-      if( text[begin] != text[end] ){
+      if( tolower(text[begin]) != tolower(text[end]) ){
          text[begin] = userchar[i];
          text[end] = userchar[i];
       }
