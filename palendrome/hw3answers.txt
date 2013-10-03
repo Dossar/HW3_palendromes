@@ -1,0 +1,4 @@
+1.) Palindrome program here.
+2.) For palindromes, an array is better because checking by index is easier. With a linked list, checking for a palindrome will be unnecessarily hard to implement and checking by index is not as efficient in linked lists.
+3.) Circular linked list program here.
+4.) Circular linked list would be better because no shifting is needed and when the ending is reached you can simply just use a pointer to the start.
