@@ -1,0 +1,43 @@
+C:\MinGW\bin>pall.exe
+Please enter a string no longer than 100 characters: ojrotjeort
+"ojrotjeort"
+What you entered above is not a palindrome.
+You will be shown three other examples of palindromes now.
+Please enter a string no longer than 100 characters for the examples:
+234uiw5
+"234uiiu432" is a possible palindrome.
+"w52344325w" is a possible palindrome.
+"uiw5225wiu" is a possible palindrome.
+
+C:\MinGW\bin>pall.exe
+Please enter a string no longer than 100 characters: 124yh98
+"124yh98"
+What you entered above is not a palindrome.
+You will be shown three other examples of palindromes now.
+Please enter a string no longer than 100 characters for the examples:
+qwporu
+"qwpopwq" is a possible palindrome.
+"ruqwqur" is a possible palindrome.
+"porurop" is a possible palindrome.
+
+C:\MinGW\bin>pall.exe
+Please enter a string no longer than 100 characters: maddam
+"maddam"
+What you entered above is a palindrome.
+You will be shown three other examples of palindromes now.
+Please enter a string no longer than 100 characters for the examples:
+1qw5bn9
+"1qwwq1" is a possible palindrome.
+"5bnnb5" is a possible palindrome.
+"91qq19" is a possible palindrome.
+
+C:\MinGW\bin>pall.exe
+Please enter a string no longer than 100 characters: torirot
+"torirot"
+What you entered above is a palindrome.
+You will be shown three other examples of palindromes now.
+Please enter a string no longer than 100 characters for the examples:
+zxcvmnb34asdf
+"zxcvcxz" is a possible palindrome.
+"mnb3bnm" is a possible palindrome.
+"4asdsa4" is a possible palindrome.
